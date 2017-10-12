@@ -1,7 +1,7 @@
 Name:		zfs-utils
 Version:	1.0
 Release:	1%{?dist}
-Summary:	
+Summary:	Utils and configs for Linux on ZFS
 
 License:	GPL
 URL:		https://github.com/t0fik/zfs-utils
