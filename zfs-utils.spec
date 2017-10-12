@@ -1,5 +1,5 @@
 Name:		zfs-utils
-Version:	1.0
+Version:	1.1
 Release:	1%{?dist}
 Summary:	Utils and configs for Linux on ZFS
 
@@ -23,12 +23,16 @@ Utils and configs for Linux on ZFS
 
 %install
 install -d 755 %{buildroot}%{_usr}/lib/kernel/install.d
-install -pm 755 src/40-dkms-zfs.install %{buildroot}%{_usr}/lib/kernel/install.d
+install -pm 755 src/10-dkms-zfs.install %{buildroot}%{_usr}/lib/kernel/install.d
 
 %files
 %defattr(-,root,root,-)
-%{_usr}/lib/kernel/install.d/40-dkms-zfs.install
+%{_usr}/lib/kernel/install.d/10-dkms-zfs.install
 
 %changelog
+* Thu Oct 12 2017 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 1.1-1
+- Fixed adding module
+- Changed script order
+
 * Thu Oct 12 2017 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 1.0-1
 - initial build
