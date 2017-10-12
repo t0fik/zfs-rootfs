@@ -12,11 +12,41 @@ _check_kernel_dir() {
   return $?
 }
 
+VER()
+{
+    # $1 = kernel version string
+
+    # Pad all numbers in $1 so that they have at least three digits, e.g.,
+    #   2.6.9-1cvs200409091247 => 002.006.009-001cvs200409091247
+    # The result should compare correctly as a string.
+
+    echo $1 | sed -e 's:\([^0-9]\)\([0-9]\):\1 \2:g' \
+        -e 's:\([0-9]\)\([^0-9]\):\1 \2:g' \
+        -e 's:\(.*\): \1 :' \
+        -e 's: \([0-9]\) : 00\1 :g' \
+        -e 's: \([0-9][0-9]\) : 0\1 :g' \
+        -e 's: ::g'
+}
+
+_module_version() {
+  local module=$1
+  local mvka m v k a
+  local last_v
+  while read mvka ;do
+    IFS=', ' read m v k a <<< "$mvka"
+    if [[ ($(VER $v) > $(VER $last_v)) ]];then
+      last_v="$v"
+    fi
+  done < <(/usr/sbin/dkms status $module)
+  echo $last_v
+  return 0
+}
+
 ret=0
 case "$COMMAND" in
   add)
-    /usr/sbin/dkms install spl -k $KERNEL_VERSION \
-    && /usr/sbin/dkms install zfs -k $KERNEL_VERSION
+    /usr/sbin/dkms install spl/$(_module_version spl) -k $KERNEL_VERSION \
+    && /usr/sbin/dkms install zfs/$(_module_version zfs) -k $KERNEL_VERSION
     ret=$?
     if ! _check_kernel_dir $KERNEL_VERSION ; then
       echo "dkms: WARNING: $kernel headers are missing, which may explain the above failures." >&2
