@@ -1,0 +1,30 @@
+#!/bin/bash
+
+COMMAND="$1"
+KERNEL_VERSION="$2"
+BOOT_DIR_ABS="$3"
+KERNEL_IMAGE="$4"
+
+_check_kernel_dir() {
+  local KVER=$1
+  DIR="/lib/modules/$KVER/build"
+  test -e $DIR/include
+  return $?
+}
+
+ret=0
+case "$COMMAND" in
+  add)
+    /usr/sbin/dkms install spl -k $KERNEL_VERSION \
+    && /usr/sbin/dkms install zfs -k $KERNEL_VERSION
+    ret=$?
+    if ! _check_kernel_dir $KERNEL_VERSION ; then
+      echo "dkms: WARNING: $kernel headers are missing, which may explain the above failures." >&2
+      echo "      please install the $header_pkg package to fix this." >&2
+      ret=2
+    fi
+    ;;
+  *)
+    ;;
+esac
+exit $ret

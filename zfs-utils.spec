@@ -9,7 +9,7 @@ Source0:	https://github.com/t0fik/%{name}/archive/v%{version}/%{name}-%{version}
 
 BuildArch:	noarch
 
-Requires:	systemd
+Requires:	systemd zfs-dkms spl-dkms
 
 BuildRequires:	systemd
 
