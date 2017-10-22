@@ -30,11 +30,7 @@ ln -sf %{_sbindir}/zmogrify %{buildroot}%{_sysconfdir}/kernel/postinst.d/zzz_zmo
 
 %files
 %defattr(-,root,root,-)
-<<<<<<< HEAD
 %{_sysconfdir}
-=======
-%{_sysconfdir}/profile.d/zfs.sh
->>>>>>> 54216743075310579db5d4cd6f8f09d96c2ad322
 %{_sbindir}/zmogrify
 
 %changelog
