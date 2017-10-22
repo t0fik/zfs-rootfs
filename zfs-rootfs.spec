@@ -1,6 +1,6 @@
 Name:		zfs-rootfs
 Version:	1.2
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Utils and configs for Linux on ZFS
 
 License:	GPL
@@ -23,17 +23,27 @@ Utils and configs for Linux on ZFS
 
 %install
 install -d %{buildroot}%{_sbindir}
+install -d %{buildroot}%{_sysconfdir}/kernel/postinst.d
 install -pm 755 src/zmogrify %{buildroot}%{_sbindir}/
 install -D -pm 644 src/profile-zfs.sh %{buildroot}%{_sysconfdir}/profile.d/zfs.sh
+ln -sf %{_sbindir}/zmogrify %{buildroot}%{_sysconfdir}/kernel/postinst.d/zzz_zmogrify
 
 %files
 %defattr(-,root,root,-)
-%{_usr}/lib/kernel/install.d/10-dkms-zfs.install
+<<<<<<< HEAD
+%{_sysconfdir}
+=======
+%{_sysconfdir}/profile.d/zfs.sh
+>>>>>>> 54216743075310579db5d4cd6f8f09d96c2ad322
+%{_sbindir}/zmogrify
 
 %changelog
+* Sun Oct 22 2017 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 1.2-2
+- Spec file fixes
+
 * Sun Oct 22 2017 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 1.2-1
-- package name changed
-- added profile environment variable export
+- Package name changed
+- Added profile environment variable export
 
 * Thu Oct 12 2017 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 1.1-1
 - Fixed adding module
