@@ -2,6 +2,9 @@
 # zmogrify - Run dracut and configure grub to boot with root on zfs.
 
 kver=$1
+
+[[ -z "${kver}" ]] && kver=$(uname -r)
+
 sh -x /usr/bin/dracut -fv --kver $kver
 
 if [[ -n "$(mount|grep /boot/efi)" ]];then
