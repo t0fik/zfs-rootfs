@@ -1,0 +1,20 @@
+#!/bin/bash
+# zmogrify - Run dracut and configure grub to boot with root on zfs.
+
+kver=$1
+sh -x /usr/bin/dracut -fv --kver $kver
+
+if [[ -n "$(mount|grep /boot/efi)" ]];then
+  mount /boot/efi
+  mounted='yes'
+fi
+
+grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
+grubby --set-default-index 0
+mkdir -p /boot/efi/EFI/fedora/x86_64-efi
+cp -a /usr/lib/grub/x86_64-efi/zfs.mod /boot/efi/EFI/fedora/x86_64-efi
+
+if [[ "x${mounted}" == "xyes" ]];then
+  umount /boot/efi
+fi
+

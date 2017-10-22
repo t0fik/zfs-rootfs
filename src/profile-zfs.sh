@@ -1,0 +1,2 @@
+export ZPOOL_VDEV_NAME_PATH=YES
+
