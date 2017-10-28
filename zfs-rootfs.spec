@@ -34,6 +34,9 @@ ln -sf %{_sbindir}/zmogrify %{buildroot}%{_sysconfdir}/kernel/postinst.d/zzz_zmo
 %{_sbindir}/zmogrify
 
 %changelog
+* Sat Oct 28 2017 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 1.2.2-1
+- Fix: bug in detection if efi partition mounted
+
 * Sun Oct 22 2017 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 1.2.1-1
 - Zmogrify uses current kernel version if run without parameters
 

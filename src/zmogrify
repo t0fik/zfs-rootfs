@@ -5,15 +5,15 @@ kver=$1
 
 [[ -z "${kver}" ]] && kver=$(uname -r)
 
-sh -x /usr/bin/dracut -fv --kver $kver
+/usr/bin/dracut -fv --kver $kver
 
-if [[ -n "$(mount|grep /boot/efi)" ]];then
+if [[ -z "$(mount|grep /boot/efi)" ]];then
   mount /boot/efi
   mounted='yes'
 fi
 
 grub2-mkconfig -o /boot/efi/EFI/fedora/grub.cfg
-grubby --set-default-index 0
+#grubby --set-default-index 0
 mkdir -p /boot/efi/EFI/fedora/x86_64-efi
 cp -a /usr/lib/grub/x86_64-efi/zfs.mod /boot/efi/EFI/fedora/x86_64-efi
 
