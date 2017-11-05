@@ -1,6 +1,8 @@
 #!/bin/bash
 # zmogrify - Run dracut and configure grub to boot with root on zfs.
 
+. /etc/profile.d/zfs.sh
+
 kver=$1
 
 [[ -z "${kver}" ]] && kver=$(uname -r)
