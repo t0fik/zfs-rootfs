@@ -9,6 +9,12 @@ kver=$1
 
 /usr/bin/dracut -fv --kver $kver
 md5sum /boot/initramfs-${kver}.img > /boot/initramfs-4.13.9-200.fc26.x86_64.md5sum
+
+#make rescue image usable
+if [[ -x /etc/kernel/postinst.d/51-dracut-rescue-postinst.sh ]];then
+  /etc/kernel/postinst.d/51-dracut-rescue-postinst.sh $@
+fi
+
 if [[ -z "$(mount|grep /boot/efi)" ]];then
   mount /boot/efi
   mounted='yes'
