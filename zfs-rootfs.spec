@@ -1,5 +1,5 @@
 Name:		zfs-rootfs
-Version:	1.2.4
+Version:	1.2.5
 Release:	1%{?dist}
 Summary:	Utils and configs for Linux on ZFS
 
@@ -34,6 +34,9 @@ ln -sf %{_sbindir}/zmogrify %{buildroot}%{_sysconfdir}/kernel/postinst.d/zzz_zmo
 %{_sbindir}/zmogrify
 
 %changelog
+* Fri Nov 11 2017 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 1.2.5-1
+- Added recreating rescue initramfs
+
 * Sun Nov 05 2017 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 1.2.4-1
 - Added setting ZPOOL_VDEV_NAME_PATH variable
 
