@@ -11,6 +11,7 @@ BuildArch:	noarch
 
 Requires:	systemd zfs-dkms spl-dkms
 
+%{?systemd_requires}
 BuildRequires:	systemd
 
 %description
@@ -28,10 +29,13 @@ install -pm 755 src/zmogrify %{buildroot}%{_sbindir}/
 install -D -pm 644 src/profile-zfs.sh %{buildroot}%{_sysconfdir}/profile.d/zfs.sh
 ln -sf %{_sbindir}/zmogrify %{buildroot}%{_sysconfdir}/kernel/postinst.d/zzz_zmogrify
 
+install -D -pm 644 src/systemd/* %{buildroot}%{_unitdir}/ 
+
 %files
 %defattr(-,root,root,-)
 %{_sysconfdir}
 %{_sbindir}/zmogrify
+%{_unitdir}
 
 %changelog
 * Fri Nov 11 2017 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 1.2.5-1
