@@ -1,5 +1,5 @@
 Name:		zfs-rootfs
-Version:	1.2.5
+Version:	1.3
 Release:	1%{?dist}
 Summary:	Utils and configs for Linux on ZFS
 
@@ -29,15 +29,20 @@ install -pm 755 src/zmogrify %{buildroot}%{_sbindir}/
 install -D -pm 644 src/profile-zfs.sh %{buildroot}%{_sysconfdir}/profile.d/zfs.sh
 ln -sf %{_sbindir}/zmogrify %{buildroot}%{_sysconfdir}/kernel/postinst.d/zzz_zmogrify
 
-install -D -pm 644 src/systemd/* %{buildroot}%{_unitdir}/ 
+for file in $(find src/systemd -type f);do
+  install -D -pm 644 ${file} %{buildroot}%{_unitdir}${file#src/systemd}
+done
 
 %files
 %defattr(-,root,root,-)
-%{_sysconfdir}
+%{_sysconfdir}/*
 %{_sbindir}/zmogrify
-%{_unitdir}
+%{_unitdir}/*/*.conf
 
 %changelog
+* Fri Nov 11 2017 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 1.3-1
+- Added dropin files for systemd
+
 * Fri Nov 11 2017 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 1.2.5-1
 - Added recreating rescue initramfs
 
