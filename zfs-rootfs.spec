@@ -1,5 +1,5 @@
 Name:		zfs-rootfs
-Version:	1.3
+Version:	1.3.1
 Release:	1%{?dist}
 Summary:	Utils and configs for Linux on ZFS
 
@@ -40,6 +40,9 @@ done
 %{_unitdir}/*/*.conf
 
 %changelog
+* Wed Aug 15 2018 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 1.3.1-1
+- Fixed checksum output file name
+
 * Fri Nov 11 2017 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 1.3-1
 - Added dropin files for systemd
 

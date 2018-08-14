@@ -8,7 +8,7 @@ kver=$1
 [[ -z "${kver}" ]] && kver=$(uname -r)
 
 /usr/bin/dracut -fv --kver $kver
-md5sum /boot/initramfs-${kver}.img > /boot/initramfs-4.13.9-200.fc26.x86_64.md5sum
+md5sum /boot/initramfs-${kver}.img > /boot/initramfs-${kver}.md5sum
 
 #make rescue image usable
 if [[ -x /etc/kernel/postinst.d/51-dracut-rescue-postinst.sh ]];then
