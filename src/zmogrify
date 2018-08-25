@@ -7,6 +7,18 @@ kver=$1
 
 [[ -z "${kver}" ]] && kver=$(uname -r)
 
+if dkms status --kernelver ${kver} | grep -q spl 2>/dev/null; then
+  splver=$(ls -d /usr/src/spl*| xargs -I{} basename {}|sort -V|tail -n1|cut -d'-' -f2)
+  dkms install -m spl/$splver
+fi
+
+if dkms status --kernelver ${kver} | grep -q zfs 2>/dev/null; then
+  zfsver=$(ls -d /usr/src/zfs*| xargs -I{} basename {}|sort -V|tail -n1|cut -d'-' -f2)
+  dkms install -m spl/$zfsver
+fi
+
+
+
 /usr/bin/dracut -fv --kver $kver
 md5sum /boot/initramfs-${kver}.img > /boot/initramfs-${kver}.md5sum
 

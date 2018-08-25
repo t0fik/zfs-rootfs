@@ -1,5 +1,5 @@
 Name:		zfs-rootfs
-Version:	1.3.1
+Version:	1.3.2
 Release:	1%{?dist}
 Summary:	Utils and configs for Linux on ZFS
 
@@ -40,6 +40,9 @@ done
 %{_unitdir}/*/*.conf
 
 %changelog
+* Sat Aug 25 2018 Jerzy Drozdz <prmbuilder@jdsieci.pl> - 1.3.2-1
+- Added checking if zfs modules are present in kernel
+
 * Wed Aug 15 2018 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 1.3.1-1
 - Fixed checksum output file name
 
