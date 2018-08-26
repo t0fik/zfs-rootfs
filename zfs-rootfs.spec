@@ -1,5 +1,5 @@
 Name:		zfs-rootfs
-Version:	1.3.4
+Version:	1.3.5
 Release:	1%{?dist}
 Summary:	Utils and configs for Linux on ZFS
 
@@ -40,6 +40,9 @@ done
 %{_unitdir}/*/*.conf
 
 %changelog
+* Sun Aug 26 2018 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 1.3.5-1
+- Changed kernel modules detection
+
 * Sun Aug 26 2018 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 1.3.4-1
 - Fixed typo in zmogrify
 

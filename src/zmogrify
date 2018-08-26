@@ -7,12 +7,12 @@ kver=$1
 
 [[ -z "${kver}" ]] && kver=$(uname -r)
 
-if ! dkms status --kernelver ${kver} | grep -q spl 2>/dev/null; then
+if ! dkms status --kernelver ${kver} -m spl | grep -q installed 2>/dev/null; then
   splver=$(ls -d /usr/src/spl*| xargs -I{} basename {}|sort -V|tail -n1|cut -d'-' -f2)
   dkms install -m spl/$splver --kernelver ${kver}
 fi
 
-if ! dkms status --kernelver ${kver} | grep -q zfs 2>/dev/null; then
+if ! dkms status --kernelver ${kver} -m zfs | grep -q installed 2>/dev/null; then
   zfsver=$(ls -d /usr/src/zfs*| xargs -I{} basename {}|sort -V|tail -n1|cut -d'-' -f2)
   dkms install -m zfs/$zfsver --kernelver ${kver}
 fi
