@@ -14,7 +14,7 @@ fi
 
 if ! dkms status --kernelver ${kver} | grep -q zfs 2>/dev/null; then
   zfsver=$(ls -d /usr/src/zfs*| xargs -I{} basename {}|sort -V|tail -n1|cut -d'-' -f2)
-  dkms install -m spl/$zfsver --kernelver ${kver}
+  dkms install -m zfs/$zfsver --kernelver ${kver}
 fi
 
 
