@@ -1,6 +1,6 @@
 Name:		zfs-rootfs
 Version:	1.3.5
-Release:	1%{?dist}
+Release:	2%{?dist}
 Summary:	Utils and configs for Linux on ZFS
 
 License:	GPL
@@ -9,7 +9,8 @@ Source0:	https://github.com/t0fik/%{name}/archive/v%{version}/%{name}-%{version}
 
 BuildArch:	noarch
 
-Requires:	systemd zfs-dkms spl-dkms
+Requires:	systemd
+Requires:       zfs-dkms
 
 %{?systemd_requires}
 BuildRequires:	systemd
@@ -40,6 +41,9 @@ done
 %{_unitdir}/*/*.conf
 
 %changelog
+* Tue May 30 2019 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 1.3.5-2
+- Removed spl-dkms dependency
+
 * Sun Aug 26 2018 Jerzy Drozdz <rpmbuilder@jdsieci.pl> - 1.3.5-1
 - Changed kernel modules detection
 
